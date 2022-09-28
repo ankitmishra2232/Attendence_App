@@ -17,6 +17,12 @@ class MainScreen extends StatelessWidget{
               ),
               Container(
                 child: Image.asset('assets/images/unigoa.jpg'),
+              ),
+              Container(
+                child: ElevatedButton(
+                  onPressed: () {  },
+                child: Text("CLASSROOM"),
+                ),
               )
             ],
           ),
