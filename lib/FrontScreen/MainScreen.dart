@@ -10,7 +10,13 @@ class MainScreen extends StatelessWidget{
           body: Column(
             children: [
               Container(
-                child: Text("Department of Computer Science and Technology") ,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 19.0,top: 30.0),
+                    child: Text("Department of Computer Science and Technology",
+                    style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                  ),
+                ) ,
               ),
               Container(
                 child: Text("GOA UNIVERSITY"),
