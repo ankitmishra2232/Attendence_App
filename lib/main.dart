@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'FrontScreen/MainScreen.dart';
+import 'FrontScreen/mainScreen.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // title: "Attendence",
+      // title: "Attendance",
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Attendence"),
+          title: const Text("Attendance"),
         ),
-        body: MainScreen(),
+        body: const MainScreen(),
       )
     );
   }
