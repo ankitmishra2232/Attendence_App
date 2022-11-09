@@ -24,20 +24,18 @@ class MainScreen extends StatelessWidget{
               ),
             ),
           ),
-          Container(
-            child: const Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: Text("Department of Computer Science and Technology",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: Text("Department of Computer Science and Technology",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-            ) ,
-          ),
+            ),
+          ) ,
           Image.asset('assets/images/unigoa.jpg'),
           ElevatedButton(
             onPressed: () {
@@ -68,41 +66,30 @@ class MainScreen extends StatelessWidget{
                       color: Colors.red,
                       elevation: 10.0,
                       child: Column(
-                        children: <Widget>[
-                          Row(
-                            children: const <Widget>[
-                              Padding(
-                                  padding: EdgeInsets.only(left: 110.0),
-                                  child: Text(
-                                    "Teacher Details",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0
-                                    ),
-                                  ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 80.0),
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
+                        children: const <Widget>[
+                          Padding(
+                              padding: EdgeInsets.only(left: 100.0, right: 100.0),
+                              child: Text(
+                                "Teacher Details",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0
                                 ),
                               ),
-                            ],
                           ),
-                          const Text(
+                          Text(
                             "Name: Jarret Fernandez",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "Age: 35",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "Address: Margao Goa",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,

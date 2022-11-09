@@ -9,6 +9,13 @@ class Classroom extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Jarret Fernandez"), //Name of Teacher
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.face),
+            tooltip: "Profile",
+            onPressed: () {},
+          )
+        ],
       ),
       body: Container(
         color: Colors.black,

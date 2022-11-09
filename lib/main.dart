@@ -1,3 +1,4 @@
+import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import 'FrontScreen/mainScreen.dart';
 
@@ -17,6 +18,19 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Attendance"),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.face),
+              tooltip: "Profile",
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => const Profile()
+                    )
+                );
+              },
+            )
+          ],
         ),
         body: const MainScreen(),
       )

@@ -8,6 +8,13 @@ class ClassData extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Android Programming"), // Name Of Subject
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.face),
+            tooltip: "Profile",
+            onPressed: () {},
+          )
+        ],
       ),
       body: Center(
         child: Padding(
