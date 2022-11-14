@@ -48,12 +48,23 @@ class _scanState extends State<scan> {
                   setState(() {
                     _displayNewTextField = true;
                   });
+                  information=_inputdata.text;
                 },
                 child: Text("Add mannually")
             ),
             Text(_inputdata.text),
             ElevatedButton(
-                onPressed: null,
+                onPressed: (){
+                  if (_data=="-1"){
+                      information = _inputdata.text;
+                  }
+                  else{
+                      information = _data;
+                  }
+
+                  print("information  "+ information);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("information  "+ information)));
+                },
                 child: Text("Submit"+information)),
             ElevatedButton(
                 onPressed: null,
