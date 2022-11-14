@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import './addLecForm.dart';
 
-class ClassData extends StatelessWidget {
+class ClassData extends StatefulWidget {
   const ClassData({Key? key}) : super(key: key);
 
+  @override
+  State<ClassData> createState() => _ClassDataState();
+}
+
+class _ClassDataState extends State<ClassData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,78 +27,25 @@ class ClassData extends StatelessWidget {
           padding: const EdgeInsets.only(top: 200.0),
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 5.0, right: 20.0),
-                child: Container(
-                  width: 5000.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Android Programming", // Name Of Subject
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 5.0, right: 20.0),
-                child: Container(
-                  width: 5000.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "CSC - 105", // Subject Code
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 5.0, right: 20.0),
-                child: Container(
-                  width: 5000.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Thursday", // Day
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 5.0, right: 20.0),
-                child: Container(
-                  width: 5000.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "09:30 - 13:30", // lecture timing
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
+              Card(
+                child: Column(
+                  children: const <Widget>[
+                    Text("Android Programming", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
+                    Text("CSC-105", style: TextStyle(fontSize: 30.0)),
+                    Text("Day and Time", style: TextStyle(fontSize: 30.0)),
+                  ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const addLecForm()
+                      )
+                    );
+                  },
                   child: const Text("Add"),
                 ),
               ),
