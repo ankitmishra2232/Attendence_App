@@ -48,24 +48,23 @@ class _scanState extends State<scan> {
                   setState(() {
                     _displayNewTextField = true;
                   });
-                  information=_inputdata.text;
+                  _data="";
                 },
                 child: Text("Add mannually")
             ),
             Text(_inputdata.text),
             ElevatedButton(
                 onPressed: (){
-                  if (_data=="-1"){
+                  if (_data=="-1" || _data == ""){
                       information = _inputdata.text;
                   }
                   else{
                       information = _data;
                   }
-
                   print("information  "+ information);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("information  "+ information)));
                 },
-                child: Text("Submit"+information)),
+                child: Text("Submit ")),
             ElevatedButton(
                 onPressed: null,
                 child: Text("View")),
@@ -74,35 +73,6 @@ class _scanState extends State<scan> {
                 child: Text("Save and Upload"))
 
 
-
-            // Container(
-            //     // padding: EdgeInsets.only(left: 120.0, top: 40.0),
-            //     child: ElevatedButton(
-            //       onPressed: () {
-            //           // formKey.currentState!.save();
-            //           print(_data);
-            //           print(_inputdata.text);
-            //           if (_data == "-1"){
-            //             information = _inputdata.text;
-            //           }
-            //           else{
-            //             information = _data;
-            //           }
-            //
-            //           print("information  "+ information);
-            //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(information)));
-            //       },
-            //       style: ElevatedButton.styleFrom(
-            //         primary: Colors.blue, //button's fill color
-            //         onPrimary: Colors.black, //specify the color of the button's text and icons as well as the overlay colors used to indicate the hover, focus, and pressed states
-            //         // onSurface: Colors.black, //specify the button's disabled text, icon, and fill color
-            //         shadowColor: Colors.red, //specify the button's elevation color
-            //         elevation: 4.0, //buttons Material shadow
-            //         textStyle: TextStyle(fontFamily: 'roboto',fontWeight: FontWeight.w800,fontSize: 25), //specify the button's text TextStyle
-            //       ),
-            //       child: Text('Submit'),
-            //     )
-            // )
           ],
       ),
     );
