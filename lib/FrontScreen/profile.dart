@@ -9,7 +9,7 @@ class Profile extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Profile"),
       ),
-      body: Text("Teacher Profile data and option to logout"),
+      body: const Text("Teacher Profile data and option to logout"),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:attendence_app/FrontScreen/addClassForm.dart';
 import 'package:flutter/material.dart';
 import './class.dart';
 
@@ -81,71 +82,15 @@ class Classroom extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => const ClassData()
-                      )
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 150.0,
-                    child: Card (
-                      color: Colors.amber,
-                      shadowColor: Colors.white,
-                      elevation: 25.0,
-                      child: Column(
-                        children: <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.only(top: 50.0),
-                            child: Text (
-                              "Android Programming",
-                              style: TextStyle(
-                                fontSize: 30.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
-                            child: Row(
-                              children: const <Widget> [
-                                Text (
-                                  "CSC-105",
-                                  style: TextStyle(fontSize: 20.0),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 105.0),
-                                  child: Text (
-                                    "09:30 - 13:30",
-                                    style: TextStyle(fontSize: 20.0),
-                                    textAlign: TextAlign.end,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
         child: const Icon(Icons.add),
         onPressed: () {
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const addClassForm(),
+          ));
           // display a form to take inputs of new class
         }
       ),
