@@ -1,3 +1,4 @@
+import 'package:attendence_app/FrontScreen/loginSignup.dart';
 import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import 'FrontScreen/mainScreen.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
             )
           ],
         ),
-        body: const MainScreen(),
+        // body: const MainScreen(),
+        body: loginsignup(),  //loginsignup page
       )
     );
   }
