@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'View.dart';
 
 class scan extends StatefulWidget {
   const scan({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class scan extends StatefulWidget {
 }
 
 class _scanState extends State<scan> {
+  List <String> uniqueID=[];
   String _data ="";
   String information ="";
   bool _displayNewTextField = false;
@@ -61,12 +63,31 @@ class _scanState extends State<scan> {
                   else{
                       information = _data;
                   }
-                  print("information  "+ information);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("information  "+ information)));
+                  // print("information  "+ information);
+                  if(information != ""){
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("information  "+ information)));
+                    uniqueID.add(information);
+                    information = "";
+                    _inputdata.text ="";
+                    _data="";
+                  }
+                  else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Insert Data")));
+                  }
+
                 },
                 child: Text("Submit ")),
             ElevatedButton(
-                onPressed: null,
+                onPressed: () {
+                  if(!uniqueID.isEmpty){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          cards(uniqueID:uniqueID)),
+                    );
+                  }
+
+                },
                 child: Text("View")),
             ElevatedButton(
                 onPressed: null,
