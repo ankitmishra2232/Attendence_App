@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:attendence_app/FrontScreen/Signup.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:http/http.dart';
+
+import 'mainScreen.dart';
 
 class loginsignup extends StatefulWidget {
   const loginsignup({Key? key}) : super(key: key);
@@ -68,6 +69,11 @@ class _loginsignupState extends State<loginsignup> {
             GestureDetector(
               onTap: (){
                 login(emailController.text.toString(), passwordController.text.toString());
+                //if validated
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                );
               },
               child: Container(
                 height: 50,
@@ -83,8 +89,7 @@ class _loginsignupState extends State<loginsignup> {
                 onPressed:(){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>
-                        Signup()),
+                    MaterialPageRoute(builder: (context) => Signup()),
                   );
                 }
               ,
