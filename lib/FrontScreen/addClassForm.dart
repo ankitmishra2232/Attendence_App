@@ -1,3 +1,4 @@
+import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 
 class addClassForm extends StatefulWidget {
@@ -13,6 +14,19 @@ class _addClassFormState extends State<addClassForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Class"),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.face),
+            tooltip: "Profile",
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const Profile()
+                  )
+              );
+            },
+          )
+        ],
       ),
       body: Form(
         child: Column(

@@ -42,7 +42,7 @@ class _ClassDataState extends State<ClassData> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const addLecForm()
+                        builder: (context) => const AddLecForm()
                       )
                     );
                   },

@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
             ),
-          ) ,
+          ),
           Image.asset('assets/images/unigoa.jpg'),
           ElevatedButton(
             onPressed: () {
