@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:attendence_app/FrontScreen/Signup.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-
-import 'mainScreen.dart';
+import 'package:http/http.dart'as http;
+import '../model/model.dart';
 
 class loginsignup extends StatefulWidget {
   const loginsignup({Key? key}) : super(key: key);
@@ -13,36 +12,29 @@ class loginsignup extends StatefulWidget {
 }
 
 class _loginsignupState extends State<loginsignup> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
 
-  void login(String email , password) async {
+  List<User1> users = [];
 
-    try{
+  Future fetchNotes() async{
+    // var notes = <User1>[];
+    var response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbw_Jw0bUK-EArzcTfruTiqSj-fqvZiZe2JqM_TGKFkaPkM8A4gFJVxjQVLdQC0eWqGDzA/exec?action=getTeacher'));
 
-      Response response = await post(
-          Uri.parse('https://script.google.com/macros/s/AKfycbz2lhhkczv6DiZBwx39Or7T_xC-0pETH2QiWvZzmLr2nJ6Njzdeg7ICTaQ_VHrLXOqcKw/exec?action=getTeacher'),   //use you API
-          body: {
-            'email' : email,
-            'password' : password
-          }
-      );
 
-      if(response.statusCode == 200){
-
-        var data = jsonDecode(response.body.toString());
-        print(data['token']);
-        print('Login successfully');
-
-      }else {
-        print('failed');
-      }
-    }catch(e){
-      print(e.toString());
+    var notesJson = jsonDecode(response.body);
+    print(notesJson);
+    for(var u in notesJson){
+      User1 user =User1(u["teacheremail"],u["password"]);
+      users.add(user);
     }
+    print(users.length);
+    return users;
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +52,7 @@ class _loginsignupState extends State<loginsignup> {
             ),
             SizedBox(height: 20,),
             TextFormField(
+              obscureText: true,
               controller: passwordController,
               decoration: InputDecoration(
                   hintText: 'Password'
@@ -68,7 +61,7 @@ class _loginsignupState extends State<loginsignup> {
             SizedBox(height: 40,),
             GestureDetector(
               onTap: (){
-                login(emailController.text.toString(), passwordController.text.toString());
+                fetchNotes();
                 //if validated
                 // Navigator.push(
                 //   context,
@@ -99,4 +92,9 @@ class _loginsignupState extends State<loginsignup> {
       ),
     );
   }
+}
+class User1{
+  final String teacheremail;
+  final String password;
+  User1(this.teacheremail, this.password);
 }

@@ -15,3 +15,15 @@ class User{
     'password':password
   };
 }
+
+class LoginUser{
+  String teacheremail,password;
+  LoginUser(this.teacheremail,this.password);
+  LoginUser.fromJson(Map<String,dynamic> json):
+      teacheremail=json['teacheremail'],
+      password=json['password'];
+  Map<String,dynamic> toJson()=>{
+    'teacheremail': teacheremail,
+    'password':password
+  };
+}
