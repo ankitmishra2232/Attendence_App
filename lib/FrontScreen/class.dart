@@ -1,3 +1,4 @@
+import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import './addLecForm.dart';
 
@@ -18,7 +19,13 @@ class _ClassDataState extends State<ClassData> {
           IconButton(
             icon: const Icon(Icons.face),
             tooltip: "Profile",
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const Profile()
+                  )
+              );
+            },
           )
         ],
       ),

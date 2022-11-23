@@ -1,4 +1,5 @@
 import 'package:attendence_app/FrontScreen/addClassForm.dart';
+import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import './class.dart';
 
@@ -14,8 +15,14 @@ class Classroom extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.face),
             tooltip: "Profile",
-            onPressed: () {},
-          )
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (context) => const Profile()
+                  )
+              );
+            },
+          ),
         ],
       ),
       body: Container(
