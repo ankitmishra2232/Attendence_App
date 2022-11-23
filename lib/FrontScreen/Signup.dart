@@ -1,5 +1,7 @@
+import 'dart:convert';
+import'../model/model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 import 'loginSignup.dart';
 
 
@@ -15,7 +17,7 @@ class _SignupState extends State<Signup> {
   final formKey = GlobalKey<FormState>();
   TextEditingController _teacheremail = TextEditingController();
   TextEditingController _name = TextEditingController();
-  TextEditingController _classID = TextEditingController();
+  TextEditingController _phone = TextEditingController();
   TextEditingController _password = TextEditingController();
 
 
@@ -23,6 +25,9 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Register please...."),
+      ),
       body: Container(
         padding: EdgeInsets.only(left:20,right: 10,top:20),
         child: Form(
@@ -65,17 +70,20 @@ class _SignupState extends State<Signup> {
 
                 ),
                 TextFormField(
-                  controller: _classID,
+                  controller: _phone,
                   decoration: const InputDecoration(
-                      icon: const Icon(Icons.class_),
-                      hintText: 'Enter your name',
-                      labelText: 'Name',
+                      icon: const Icon(Icons.phone_android),
+                      hintText: 'Enter your mobile number',
+                      labelText: 'Phone',
                 ),
                 ),
                 Container(
                   padding: EdgeInsets.only(left:100,top: 30),
                   child: ElevatedButton(
                     onPressed: (){
+
+                      postData();
+                      // print(_password.text);
                     //  if submitted succesfully back to login screen
                       Navigator.push(
                         context,
@@ -91,6 +99,15 @@ class _SignupState extends State<Signup> {
         ),
       ),
     );
+  }
+  postData() async{
+    final user= User(_name.text, _teacheremail.text, _phone.text, _password.text);
+    String userdata=jsonEncode(user);
+    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbwtXcJRcp4Wtesto0VfB4s4QdhzLmjrzFXAsLFl5Cg7gP8yXaImcPebYuFc763doLb_BA/exec?action=addTeacher"),
+        body: userdata
+    );
+    print(response.body);
+
   }
 }
 bool isEmailValid(String? email) {

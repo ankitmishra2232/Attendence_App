@@ -70,10 +70,10 @@ class _loginsignupState extends State<loginsignup> {
               onTap: (){
                 login(emailController.text.toString(), passwordController.text.toString());
                 //if validated
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => MainScreen()),
+                // );
               },
               child: Container(
                 height: 50,
