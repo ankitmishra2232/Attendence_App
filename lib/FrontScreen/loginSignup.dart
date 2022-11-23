@@ -61,7 +61,7 @@ class _loginsignupState extends State<loginsignup> {
             SizedBox(height: 40,),
             GestureDetector(
               onTap: (){
-                fetchNotes();
+                // fetchNotes();
                 //if validated
                 // Navigator.push(
                 //   context,
@@ -69,24 +69,35 @@ class _loginsignupState extends State<loginsignup> {
                 // );
               },
               child: Container(
-                height: 50,
+                height: 50.0,
                 decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(10)
+                    borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Center(child: Text('Login'),),
+                child: Center(
+                  child: Text('Login'),
+                ),
               ),
-
             ),
-            ElevatedButton(
-                onPressed:(){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Signup()),
-                  );
-                }
-              ,
-                child: Text("Signup"),),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                height: 50.0,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: ElevatedButton(
+                  onPressed:(){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Signup()),
+                    );
+                  },
+                  child: const Text("Signup... Create New Account"),
+                ),
+              ),
+            ),
           ],
         ),
       ),

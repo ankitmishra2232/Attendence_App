@@ -90,6 +90,7 @@ class _AddLecFormState extends State<AddLecForm> {
                   padding: const EdgeInsets.only(top: 10.0),
                   child: ElevatedButton(
                     onPressed: () {
+                      int value = checkTime(startTimeVal, endTimeVal);
                       // data will saved in excel sheet
                     },
                     child: const Text("Submit"),
@@ -101,5 +102,14 @@ class _AddLecFormState extends State<AddLecForm> {
         ),
       ),
     );
+  }
+
+  int checkTime(startTimeVal, endTimeVal) {
+    if (startTimeVal > endTimeVal) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
   }
 }

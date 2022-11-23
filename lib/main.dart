@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
               tooltip: "Profile",
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const Profile()
-                    )
+                  MaterialPageRoute(
+                    builder: (context) => const Profile()
+                  )
                 );
               },
             )
