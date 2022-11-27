@@ -19,9 +19,9 @@ class _ProfileState extends State<Profile> {
             tooltip: "Profile",
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const Profile()
-                  )
+                MaterialPageRoute(
+                  builder: (context) => const Profile()
+                )
               );
             },
           )
@@ -29,17 +29,26 @@ class _ProfileState extends State<Profile> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 150.0),
+          padding: const EdgeInsets.only(bottom: 50.0),
           child: Container(
             color: Colors.red,
-            width: 200.0,
-            height: 200.0,
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: Card(
               color: Colors.lightBlue,
               child: Column(
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      color: Colors.white,
+                      child: const Icon(Icons.face, size: 100.0),
+                    ),
+                  ),
                   const Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                    padding: EdgeInsets.only(top: 20.0),
                     child: Text(
                       "Teacher Name",
                       style: TextStyle(
@@ -48,7 +57,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                    padding: EdgeInsets.only(top: 20.0),
                     child: Text(
                       "Teacher Email",
                       style: TextStyle(
@@ -57,7 +66,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                    padding: EdgeInsets.only(top: 20.0),
                     child: Text(
                       "Subjects Taught",
                       style: TextStyle(
@@ -66,7 +75,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.only(top: 80.0),
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Text("LogOut"),

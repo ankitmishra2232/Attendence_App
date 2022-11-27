@@ -32,19 +32,19 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget> [
             Padding(
               padding: const EdgeInsets.only(top: 30.0,),
               child: Container(
                 color: Colors.red,
                 child: const Center (
-                    child: Padding (
-                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Text(
-                        "GOA UNIVERSITY",
-                        style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
-                      ),
-                    )
+                  child: Padding (
+                    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                    child: Text(
+                      "GOA UNIVERSITY",
+                      style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
               ),
             ),
