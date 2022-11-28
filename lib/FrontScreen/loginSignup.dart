@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:attendence_app/FrontScreen/Signup.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 import '../model/model.dart';
 import 'dart:async';
+
+import 'mainScreen.dart';
 class loginsignup extends StatefulWidget {
   const loginsignup({Key? key}) : super(key: key);
 
@@ -14,25 +17,36 @@ class loginsignup extends StatefulWidget {
 class _loginsignupState extends State<loginsignup> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool out=true;
 
   List<User1> users = [];
 
   fetchNotes() async{
     // var notes = <User1>[];
-    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbw_Jw0bUK-EArzcTfruTiqSj-fqvZiZe2JqM_TGKFkaPkM8A4gFJVxjQVLdQC0eWqGDzA/exec?action=getTeacher'));
+    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getTeacher'));
     print(response.statusCode);
-
+    print(response.body);
     var notesJson = jsonDecode(response.body);
     print(notesJson);
     for(var u in notesJson){
-      User1 user =User1(u["teacheremail"],u["password"]);
+      User1 user =User1(u["teacherEmail"],u["password"]);
       users.add(user);
     }
     print(users.length);
     return users;
   }
-
+  // checkEmailPassword(a,b,c){
+  //   for(var i =0;i<a.length;i++) {
+  //     if(a[i].teacherEmail==b && a[i].password==c){
+  //       print(out);
+  //       // return out;
+  //     }
+  //   else{
+  //     out = false;
+  //     print(out);
+  //     }
+  //   }
+  // }
 
 
   @override
@@ -62,11 +76,13 @@ class _loginsignupState extends State<loginsignup> {
             GestureDetector(
               onTap: (){
                 fetchNotes();
+                // print(users[0].teacherEmail);
+                // checkEmailPassword(users,emailController,passwordController);
                 //if validated
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => MainScreen()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                );
               },
               child: Container(
                 height: 50.0,
@@ -105,7 +121,7 @@ class _loginsignupState extends State<loginsignup> {
   }
 }
 class User1{
-  final String teacheremail;
-  final String password;
-  User1(this.teacheremail, this.password);
+  final String? teacherEmail;
+  final String? password;
+  User1(this.teacherEmail, this.password);
 }
