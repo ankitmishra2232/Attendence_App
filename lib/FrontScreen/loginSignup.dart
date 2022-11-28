@@ -87,12 +87,12 @@ class _loginsignupState extends State<loginsignup> {
                   }
                   else if(users[i].teacherEmail==emailController.text &&  users[i].password!=passwordController.text){
                     print("no");
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please insert correct Password")));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please insert correct Password")));
                     // break;
                   }
                   else if(users[i].teacherEmail!=emailController.text ){
                     print("no");
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please register youself First")));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please register youself First")));
                     // break;
                   }
                   print(users[i].teacherEmail);
