@@ -3,7 +3,7 @@ import 'package:attendence_app/FrontScreen/Signup.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 import '../model/model.dart';
-
+import 'dart:async';
 class loginsignup extends StatefulWidget {
   const loginsignup({Key? key}) : super(key: key);
 
@@ -18,10 +18,10 @@ class _loginsignupState extends State<loginsignup> {
 
   List<User1> users = [];
 
-  Future fetchNotes() async{
+  fetchNotes() async{
     // var notes = <User1>[];
-    var response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbw_Jw0bUK-EArzcTfruTiqSj-fqvZiZe2JqM_TGKFkaPkM8A4gFJVxjQVLdQC0eWqGDzA/exec?action=getTeacher'));
-
+    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbw_Jw0bUK-EArzcTfruTiqSj-fqvZiZe2JqM_TGKFkaPkM8A4gFJVxjQVLdQC0eWqGDzA/exec?action=getTeacher'));
+    print(response.statusCode);
 
     var notesJson = jsonDecode(response.body);
     print(notesJson);
@@ -61,7 +61,7 @@ class _loginsignupState extends State<loginsignup> {
             SizedBox(height: 40,),
             GestureDetector(
               onTap: (){
-                // fetchNotes();
+                fetchNotes();
                 //if validated
                 // Navigator.push(
                 //   context,
