@@ -1,5 +1,6 @@
 import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
+import '../scan/scan.dart';
 import './addLecForm.dart';
 
 class ClassData extends StatefulWidget {
@@ -21,12 +22,12 @@ class _ClassDataState extends State<ClassData> {
             tooltip: "Profile",
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const Profile()
-                  )
+                MaterialPageRoute(
+                  builder: (context) => const Profile(),
+                ),
               );
             },
-          )
+          ),
         ],
       ),
       body: Center(
@@ -54,6 +55,19 @@ class _ClassDataState extends State<ClassData> {
                     );
                   },
                   child: const Text("Add"),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const scan()
+                        )
+                    );
+                  },
+                  child: const Text("Scan"),
                 ),
               ),
             ],

@@ -3,9 +3,14 @@ import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import './class.dart';
 
-class Classroom extends StatelessWidget {
+class Classroom extends StatefulWidget {
   const Classroom({Key? key}) : super(key: key);
 
+  @override
+  State<Classroom> createState() => _ClassroomState();
+}
+
+class _ClassroomState extends State<Classroom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,13 +98,13 @@ class Classroom extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const addClassForm(),
-          ));
-          // display a form to take inputs of new class
-        }
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const addClassForm(),
+                ));
+            // display a form to take inputs of new class
+          }
       ),
     );
   }
