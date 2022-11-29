@@ -15,9 +15,32 @@ class Classroom extends StatefulWidget {
 
 class _ClassroomState extends State<Classroom> {
 
+  List<Classes1> classList=[];
+  getClasses() async {
+    // fetch all classes taught by the logged in teacher
+    // var classList = <Classes>[];
+    // Classes classes;
+    final response = await http.get(Uri.parse("https://script.google.com/macros/s/AKfycbzU3UfJ86OA_VXBXB8cDASbWDfgbQlsaw_Rbqako3rUHEgPQNbB5yMlkvvBxQRQvHgF_w/exec?action=getClasses"));
+    // print(response.statusCode);
+    // print(response.body);
+    var notesJson = jsonDecode(response.body);
+    print(notesJson);
+    for(var x in notesJson) {
+      Classes1 classes= Classes1(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
+      // print(jsonEncode(classes));
+      // print(classes);
+      classList.add(classes);
+    }
+    print(classList.length);
+    return classList;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     // classList = getClasses();
+    getClasses();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Jarret Fernandez"), //Name of Teacher
@@ -36,12 +59,12 @@ class _ClassroomState extends State<Classroom> {
         ],
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: Colors.black,
+        // width: MediaQuery.of(context).size.width,
+        // height: MediaQuery.of(context).size.height,
+        // color: Colors.black,
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          child: FutureBuilder(
+        child:
+          FutureBuilder(
             future: getClasses(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
@@ -58,54 +81,58 @@ class _ClassroomState extends State<Classroom> {
                 return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, i) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                      ),
-                      onPressed: () {},
-                      child: Padding (
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 150.0,
-                          child: Card(
-                            color: Colors.amber,
-                            shadowColor: Colors.white,
-                            elevation: 25.0,
-                            child: Column(
-                              children: <Widget>[
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 40.0),
-                                  child: Text (
-                                    "CSC-105",
-                                    style: TextStyle(
-                                      fontSize: 30.0,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0, left: 70.0),
-                                  child: Row(
-                                    children: const <Widget> [
-                                      Text (
-                                        "Android Programming",
-                                        style: TextStyle(fontSize: 20.0),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                    return ListTile(
+                      title: Text(snapshot.data[i].ClassID),
                     );
+
+
+                    //   ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(
+                    //     primary: Colors.red,
+                    //   ),
+                    //   onPressed: () {},
+                    //   child: Padding (
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: SizedBox(
+                    //       height: 150.0,
+                    //       child: Card(
+                    //         color: Colors.amber,
+                    //         shadowColor: Colors.white,
+                    //         elevation: 25.0,
+                    //         child: Column(
+                    //           children: <Widget>[
+                    //             const Padding(
+                    //               padding: EdgeInsets.only(top: 40.0),
+                    //               child: Text (
+                    //                 "CSC-105",
+                    //                 style: TextStyle(
+                    //                   fontSize: 30.0,
+                    //                   decoration: TextDecoration.underline,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             Padding(
+                    //               padding: const EdgeInsets.only(top: 10.0, left: 70.0),
+                    //               child: Row(
+                    //                 children: const <Widget> [
+                    //                   Text (
+                    //                     "Android Programming",
+                    //                     style: TextStyle(fontSize: 20.0),
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // );
                   }
                 );
               }
             }
           ),
-        ),
       ),
       floatingActionButton: FloatingActionButton.large(
         child: const Icon(Icons.add),
@@ -119,22 +146,11 @@ class _ClassroomState extends State<Classroom> {
     );
   }
 
-  getClasses() async {
-    // fetch all classes taught by the logged in teacher
-    var classList = <Classes>[];
-    Classes classes;
-    final response = await http.get(Uri.parse("https://script.google.com/macros/s/AKfycbwqKHICXrwmTh-iyzQJykKV2Tu5Wr31FfiOpSyr05yxCxee-WulCqo68Vd-kgD5dXgMRg/exec?action=getClass"));
-    print(response.statusCode);
-    print(response.body);
-    var notesJson = jsonDecode(response.body);
-    print(notesJson);
-    for(var x in notesJson) {
-      classes = Classes(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
-      print(jsonEncode(classes));
-      print(classes);
-      classList.add(classes);
-    }
-    print(classList.length);
-    return classList;
-  }
+
+}
+class Classes1{
+  final String ClassID;
+  final String ClassName;
+  final String TeacherEmail;
+  Classes1(this.ClassID,this.ClassName,this.TeacherEmail);
 }
