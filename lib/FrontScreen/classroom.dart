@@ -15,8 +15,6 @@ class Classroom extends StatefulWidget {
 
 class _ClassroomState extends State<Classroom> {
 
-  List<Classes> classList = [];
-
   @override
   Widget build(BuildContext context) {
     // classList = getClasses();
@@ -38,62 +36,75 @@ class _ClassroomState extends State<Classroom> {
         ],
       ),
       body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         color: Colors.black,
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (context) => const ClassData()
-                      )
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 150.0,
-                    child: Card (
-                      color: Colors.amber,
-                      shadowColor: Colors.white,
-                      elevation: 25.0,
-                      child: Column(
-                        children: <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.only(top: 40.0),
-                            child: Text (
-                              "CSC-105",
-                              style: TextStyle(
-                                fontSize: 30.0,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0, left: 70.0),
-                            child: Row(
-                              children: const <Widget> [
-                                Text (
-                                  "Android Programming",
-                                  style: TextStyle(fontSize: 20.0),
+        child: Card(
+          child: FutureBuilder(
+            future: getClasses(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.data == null) {
+                return const Center(
+                  child: Text(
+                    "Loading...",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                    ),
+                  )
+                );
+              }
+              else {
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, i) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                      onPressed: () {},
+                      child: Padding (
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 150.0,
+                          child: Card(
+                            color: Colors.amber,
+                            shadowColor: Colors.white,
+                            elevation: 25.0,
+                            child: Column(
+                              children: <Widget>[
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 40.0),
+                                  child: Text (
+                                    "CSC-105",
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0, left: 70.0),
+                                  child: Row(
+                                    children: const <Widget> [
+                                      Text (
+                                        "Android Programming",
+                                        style: TextStyle(fontSize: 20.0),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          )
-                        ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
+                    );
+                  }
+                );
+              }
+            }
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
@@ -110,13 +121,17 @@ class _ClassroomState extends State<Classroom> {
 
   getClasses() async {
     // fetch all classes taught by the logged in teacher
-    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getClasses'));
+    var classList = <Classes>[];
+    Classes classes;
+    final response = await http.get(Uri.parse("https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getClasses"));
     print(response.statusCode);
     print(response.body);
     var notesJson = jsonDecode(response.body);
     print(notesJson);
-    for(var u in notesJson) {
-      Classes classes = Classes(u["ClassID"], u["ClassName"], u["TeacherEmail"]);
+    for(var x in notesJson) {
+      classes = Classes(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
+      print(jsonEncode(classes));
+      print(classes);
       classList.add(classes);
     }
     print(classList.length);
