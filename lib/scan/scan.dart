@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:intl/intl.dart';
 import 'View.dart';
+import 'package:attendence_app/model/model.dart';
 
 class scan extends StatefulWidget {
   const scan({Key? key}) : super(key: key);
@@ -11,6 +15,9 @@ class scan extends StatefulWidget {
 
 class _scanState extends State<scan> {
   List <String> uniqueID=[];
+  String date1="";
+  String time1="";
+  String attendence0="";
   String _data ="";
   String information ="";
   bool _displayNewTextField = false;
@@ -22,6 +29,11 @@ class _scanState extends State<scan> {
 
   @override
   Widget build(BuildContext context) {
+    final date= DateTime.now();  //current date and time
+    String date0= DateFormat.yMMMMd('en_US').format(date);
+    final time = DateTime.now();
+    final time0 = DateFormat.Hm().format(time);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Scanning"),
@@ -90,7 +102,14 @@ class _scanState extends State<scan> {
                 },
                 child: Text("View")),
             ElevatedButton(
-                onPressed: null,
+                onPressed: (){
+                  // print(uniqueID.toString());
+                  attendence0 = uniqueID.toString();
+                  date1=date0;
+                  time1=time0;
+
+                  postAttendence();
+                },
                 child: Text("Save and Upload"))
 
 
@@ -98,7 +117,15 @@ class _scanState extends State<scan> {
       ),
     );
   }
+  postAttendence() async{
+    final attendence= Att("abc@gmail.com",date1,time1,attendence0);
+    String attendenceinfo=jsonEncode(attendence);
+    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbw6xFTlzMRie2GahS_ruQzJ0CD49Y1kkKz6kd9pLfy0XEl2I1yFbkMsOfp0FM1At8i3cg/exec?action=addAttandance"),
+      body: attendenceinfo
+    );
+    print(response.body);
 
+  }
 
 }
 
