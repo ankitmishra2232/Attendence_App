@@ -23,16 +23,16 @@ class _loginsignupState extends State<loginsignup> {
 
   fetchNotes() async{
     // var notes = <User1>[];
-    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getTeacher'));
-    print(response.statusCode);
-    print(response.body);
+    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbxUX_3HZZzXKIcMNWRr4S_BgJyEghj8sACssjLkErfrxcVKTiNHF-nrd-KrscA5WqtzvQ/exec?action=getTeacher'));
+    // print(response.statusCode);
+    // print(response.body);
     var notesJson = jsonDecode(response.body);
     print(notesJson);
     for(var u in notesJson){
       User1 user =User1(u["teacherEmail"],u["password"]);
       users.add(user);
     }
-    print(users.length);
+    // print(users.length);
     return users;
   }
   // checkEmailPassword(a,b,c){
@@ -66,7 +66,7 @@ class _loginsignupState extends State<loginsignup> {
             ),
             SizedBox(height: 20,),
             TextFormField(
-              obscureText: true,
+              // obscureText: true,
               controller: passwordController,
               decoration: InputDecoration(
                   hintText: 'Password'
@@ -76,13 +76,32 @@ class _loginsignupState extends State<loginsignup> {
             GestureDetector(
               onTap: (){
                 fetchNotes();
-                // print(users[0].teacherEmail);
+                print(passwordController.text);
+                for(var i=0;i<users.length;i++){
+                  if(users[i].teacherEmail==emailController.text &&  users[i].password==passwordController.text){
+                    print("yes");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainScreen()),
+                    );
+                  }
+                  else if(users[i].teacherEmail==emailController.text &&  users[i].password!=passwordController.text){
+                    print("no");
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please insert correct Password")));
+                    // break;
+                  }
+                  else if(users[i].teacherEmail!=emailController.text ){
+                    print("no");
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please register youself First")));
+                    // break;
+                  }
+                  print(users[i].teacherEmail);
+                  print(users[i].password);
+                }
+                // print(users[0].password);
                 // checkEmailPassword(users,emailController,passwordController);
                 //if validated
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                );
+
               },
               child: Container(
                 height: 50.0,
