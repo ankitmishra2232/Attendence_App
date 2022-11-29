@@ -91,7 +91,12 @@ class _AddLecFormState extends State<AddLecForm> {
                   child: ElevatedButton(
                     onPressed: () {
                       int value = checkTime(startTimeVal, endTimeVal);
-                      // data will saved in excel sheet
+                      if (value == 1) {
+                        // push data to excel
+                      }
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Wrong Timings")));
+                      }
                     },
                     child: const Text("Submit"),
                   ),
@@ -106,10 +111,10 @@ class _AddLecFormState extends State<AddLecForm> {
 
   int checkTime(startTimeVal, endTimeVal) {
     if (startTimeVal > endTimeVal) {
-      return 1;
+      return 1; // true
     }
     else {
-      return 0;
+      return 0; // false
     }
   }
 }

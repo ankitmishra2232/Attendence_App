@@ -2,6 +2,9 @@ import 'package:attendence_app/FrontScreen/addClassForm.dart';
 import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import './class.dart';
+import 'dart:convert';
+import 'package:attendence_app/model/classes.dart';
+import 'package:http/http.dart'as http;
 
 class Classroom extends StatefulWidget {
   const Classroom({Key? key}) : super(key: key);
@@ -107,5 +110,24 @@ class _ClassroomState extends State<Classroom> {
           }
       ),
     );
+  }
+
+
+
+  getClasses() async {
+    // fetch all classes taught by the logged in teacher
+    List<Classes> classList = [];
+    final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getClasses'));
+    print(response.statusCode);
+    print(response.body);
+    var notesJson = jsonDecode(response.body);
+    print(notesJson);
+    for(var u in notesJson){
+      // Classes user =Classes(u["teacherEmail"],u["password"]);
+      Classes classes = Classes(u["ClassID"], u["ClassName"], u["TeacherEmail"]);
+      classList.add(classes);
+    }
+    print(classList.length);
+    return classList;
   }
 }

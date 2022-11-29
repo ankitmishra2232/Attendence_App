@@ -54,7 +54,7 @@ class _ClassDataState extends State<ClassData> {
                       )
                     );
                   },
-                  child: const Text("Add"),
+                  child: const Text("Add Lecture"),
                 ),
               ),
               Padding(
