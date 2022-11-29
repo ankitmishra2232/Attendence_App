@@ -33,8 +33,11 @@ class _scanState extends State<scan> {
     String date0= DateFormat.yMMMMd('en_US').format(date);
     final time = DateTime.now();
     final time0 = DateFormat.Hm().format(time);
-    
+    attendence0 = uniqueID.toString();
+    date1=date0.toString();
+    time1=time0.toString();
     return Scaffold(
+
       appBar: AppBar(
         title: Text("Scanning"),
       ),
@@ -104,10 +107,7 @@ class _scanState extends State<scan> {
             ElevatedButton(
                 onPressed: (){
                   // print(uniqueID.toString());
-                  attendence0 = uniqueID.toString();
-                  date1=date0;
-                  time1=time0;
-
+                  print(" hii"+attendence0);
                   postAttendence();
                 },
                 child: Text("Save and Upload"))
@@ -120,10 +120,11 @@ class _scanState extends State<scan> {
   postAttendence() async{
     final attendence= Att("abc@gmail.com",date1,time1,attendence0);
     String attendenceinfo=jsonEncode(attendence);
-    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbw6xFTlzMRie2GahS_ruQzJ0CD49Y1kkKz6kd9pLfy0XEl2I1yFbkMsOfp0FM1At8i3cg/exec?action=addAttandance"),
-      body: attendenceinfo
+    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbxtK7kAkxeOT4xLQEVP41mZf33WkJqZZ9brNaQ_VfedlXvZX93K30IZe4iCf4DKNJoxwg/exec?action=addAttandance"),
+      body: attendenceinfo,
     );
     print(response.body);
+    print(attendenceinfo);
 
   }
 
