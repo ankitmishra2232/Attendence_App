@@ -40,7 +40,7 @@ class _ClassroomState extends State<Classroom> {
   @override
   Widget build(BuildContext context) {
     // classList = getClasses();
-    getClasses();
+    // getClasses();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Jarret Fernandez"), //Name of Teacher
@@ -128,7 +128,8 @@ class _ClassroomState extends State<Classroom> {
                     //     ),
                     //   ),
                     // );
-                  }
+                  },
+
                 );
               }
             }

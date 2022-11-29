@@ -4,6 +4,8 @@ import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:attendence_app/model/classes.dart';
 import 'package:flutter/material.dart';
 
+import 'classroom.dart';
+
 class addClassForm extends StatefulWidget {
   const addClassForm({Key? key}) : super(key: key);
 
@@ -71,6 +73,10 @@ class _addClassFormState extends State<addClassForm> {
                   //   addClass();
                   // }
                   addClass();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Classroom()),
+                  );
                 },
                 child: const Text("Submit"),
               ),
