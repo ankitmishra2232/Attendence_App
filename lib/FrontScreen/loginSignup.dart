@@ -51,6 +51,7 @@ class _loginsignupState extends State<loginsignup> {
 
   @override
   Widget build(BuildContext context) {
+    fetchNotes();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -75,7 +76,6 @@ class _loginsignupState extends State<loginsignup> {
             SizedBox(height: 40,),
             GestureDetector(
               onTap: (){
-                fetchNotes();
                 print(passwordController.text);
                 for(var i=0;i<users.length;i++){
                   if(users[i].teacherEmail==emailController.text &&  users[i].password==passwordController.text){
