@@ -110,7 +110,7 @@ class _AddLecFormState extends State<AddLecForm> {
   }
 
   int checkTime(startTimeVal, endTimeVal) {
-    if (startTimeVal > endTimeVal) {
+    if (startTimeVal.compareTo(endTimeVal) < 0) {
       return 1; // true
     }
     else {

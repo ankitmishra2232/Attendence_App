@@ -81,9 +81,10 @@ class _addClassFormState extends State<addClassForm> {
               child: ElevatedButton(
                 onPressed: () {
                   // add value in database
-                  if (_formKey.currentState!.validate()) {
-                    addClass();
-                  }
+                  // if (_formKey.currentState!.validate()) {
+                  //   addClass();
+                  // }
+                  addClass();
                 },
                 child: const Text("Submit"),
               ),
