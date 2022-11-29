@@ -60,6 +60,7 @@ class _loginsignupState extends State<loginsignup> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
+              autofocus: true,
               controller: emailController,
               decoration: InputDecoration(
                   hintText: 'Email'

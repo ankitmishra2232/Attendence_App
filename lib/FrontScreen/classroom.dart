@@ -14,8 +14,12 @@ class Classroom extends StatefulWidget {
 }
 
 class _ClassroomState extends State<Classroom> {
+
+  List<Classes> classList = [];
+
   @override
   Widget build(BuildContext context) {
+    // classList = getClasses();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Jarret Fernandez"), //Name of Teacher
@@ -62,9 +66,9 @@ class _ClassroomState extends State<Classroom> {
                       child: Column(
                         children: <Widget>[
                           const Padding(
-                            padding: EdgeInsets.only(top: 50.0),
+                            padding: EdgeInsets.only(top: 40.0),
                             child: Text (
-                              "Android Programming",
+                              "CSC-105",
                               style: TextStyle(
                                 fontSize: 30.0,
                                 decoration: TextDecoration.underline,
@@ -72,20 +76,12 @@ class _ClassroomState extends State<Classroom> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 30.0, left: 20.0, right: 20.0),
+                            padding: const EdgeInsets.only(top: 10.0, left: 70.0),
                             child: Row(
                               children: const <Widget> [
                                 Text (
-                                  "CSC-105",
+                                  "Android Programming",
                                   style: TextStyle(fontSize: 20.0),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 105.0),
-                                  child: Text (
-                                    "09:30 - 13:30",
-                                    style: TextStyle(fontSize: 20.0),
-                                    textAlign: TextAlign.end,
-                                  ),
                                 ),
                               ],
                             ),
@@ -101,29 +97,25 @@ class _ClassroomState extends State<Classroom> {
         ),
       ),
       floatingActionButton: FloatingActionButton.large(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const addClassForm(),
-                ));
-            // display a form to take inputs of new class
-          }
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const addClassForm(),
+          ));
+          // display a form to take inputs of new class
+        }
       ),
     );
   }
 
-
-
   getClasses() async {
     // fetch all classes taught by the logged in teacher
-    List<Classes> classList = [];
     final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getClasses'));
     print(response.statusCode);
     print(response.body);
     var notesJson = jsonDecode(response.body);
     print(notesJson);
-    for(var u in notesJson){
-      // Classes user =Classes(u["teacherEmail"],u["password"]);
+    for(var u in notesJson) {
       Classes classes = Classes(u["ClassID"], u["ClassName"], u["TeacherEmail"]);
       classList.add(classes);
     }

@@ -12,8 +12,9 @@ class addClassForm extends StatefulWidget {
 }
 
 class _addClassFormState extends State<addClassForm> {
-  // final _formKey = GlobalKey<FormState>();
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _classID = TextEditingController();
+  TextEditingController _className = TextEditingController();
   String ClassID = "";
   String ClassName = "";
   String TeacherEmail = "";
@@ -44,36 +45,21 @@ class _addClassFormState extends State<addClassForm> {
               padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 150.0),
               child: TextFormField(
                 autofocus: true,
+                keyboardType: TextInputType.text,
+                controller: _classID,
                 decoration: const InputDecoration(
                   label: Text("Enter ClassID"),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please Enter ClassID";
-                  }
-                  else {
-                    ClassID = value;
-                  }
-                  return null;
-                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
               child: TextFormField(
-                autofocus: true,
+                keyboardType: TextInputType.name,
+                controller: _className,
                 decoration: const InputDecoration(
                   label: Text("Enter Class Name"),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Please Enter Class Name";
-                  }
-                  else {
-                    ClassName = value;
-                  }
-                  return null;
-                },
               ),
             ),
             Padding(
@@ -97,7 +83,9 @@ class _addClassFormState extends State<addClassForm> {
 
   addClass() async { // testing not done
     // final classes = Classes(ClassID, ClassName, TeacherEmail); //teacher email needs to fetch from local storage
-    final classes = Classes(ClassID, ClassName, "jsf001@unigoa.ac.in");
+    print(_classID.text);
+    print(_className.text);
+    final classes = Classes(_classID.text, _className.text, "jsf001@unigoa.ac.in");
     String classData = jsonEncode(classes);
     var response = await http.post(
       Uri.parse("https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=addClass"),
