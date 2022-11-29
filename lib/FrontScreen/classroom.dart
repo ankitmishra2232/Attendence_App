@@ -123,7 +123,7 @@ class _ClassroomState extends State<Classroom> {
     // fetch all classes taught by the logged in teacher
     var classList = <Classes>[];
     Classes classes;
-    final response = await http.get(Uri.parse("https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=getClasses"));
+    final response = await http.get(Uri.parse("https://script.google.com/macros/s/AKfycbwqKHICXrwmTh-iyzQJykKV2Tu5Wr31FfiOpSyr05yxCxee-WulCqo68Vd-kgD5dXgMRg/exec?action=getClass"));
     print(response.statusCode);
     print(response.body);
     var notesJson = jsonDecode(response.body);
