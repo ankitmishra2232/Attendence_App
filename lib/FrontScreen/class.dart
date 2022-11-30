@@ -7,6 +7,7 @@ import 'classroom.dart';
 class ClassData extends StatefulWidget {
   ClassData(this.data, {Key? key}) : super(key: key);
   Classes1 data;
+
   @override
   State<ClassData> createState() => _ClassDataState();
 }

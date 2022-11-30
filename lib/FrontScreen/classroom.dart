@@ -18,30 +18,19 @@ class _ClassroomState extends State<Classroom> {
   List<Classes1> classList = [];
 
   getClasses() async {
-    // fetch all classes taught by the logged in teacher
-    // var classList = <Classes>[];
-    // Classes classes;
     final response = await http.get(
         Uri.parse("https://script.google.com/macros/s/AKfycbzU3UfJ86OA_VXBXB8cDASbWDfgbQlsaw_Rbqako3rUHEgPQNbB5yMlkvvBxQRQvHgF_w/exec?action=getClasses"));
-    // print(response.statusCode);
-    // print(response.body);
     var notesJson = jsonDecode(response.body);
-    print(notesJson);
     for (var x in notesJson) {
       Classes1 classes = Classes1(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
-      // print(jsonEncode(classes));
-      // print(classes);
       classList.add(classes);
     }
-    print(classList.length);
     return classList;
   }
 
 
   @override
   Widget build(BuildContext context) {
-    // classList = getClasses();
-    // getClasses();
     return Scaffold(
         appBar: AppBar(
           title: Text("${widget.user.teacherName}"), //Name of Teacher
@@ -51,9 +40,9 @@ class _ClassroomState extends State<Classroom> {
               tooltip: "Profile",
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => Profile(widget.user),
-                    )
+                  MaterialPageRoute(
+                    builder: (context) => Profile(widget.user),
+                  )
                 );
               },
             ),
@@ -91,13 +80,13 @@ class _ClassroomState extends State<Classroom> {
                                 ),
                                 onPressed: () {
                                   Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (context) => ClassData(snapshot.data[i])
-                                      )
+                                    MaterialPageRoute(
+                                      builder: (context) => ClassData(snapshot.data[i])
+                                    )
                                   );
                                 },
                                 child: Padding(
-                                  padding: EdgeInsets.all(20.0),
+                                  padding: const EdgeInsets.all(20.0),
                                   child: SizedBox(
                                     height: 150.0,
                                     width: MediaQuery.of(context).size.width,
@@ -107,20 +96,20 @@ class _ClassroomState extends State<Classroom> {
                                       child: Column(
                                         children: <Widget>[
                                           Padding(
-                                            padding: EdgeInsets.only(top: 40.0),
+                                            padding: const EdgeInsets.only(top: 40.0),
                                             child: Text(
                                               "${snapshot.data[i].ClassID}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 30.0,
                                                 decoration: TextDecoration.underline,
                                               ),
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.only(top: 10.0),
+                                            padding: const EdgeInsets.only(top: 10.0),
                                             child: Text(
                                               "${snapshot.data[i].ClassName}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 20.0,
                                               ),
                                             ),
@@ -140,13 +129,14 @@ class _ClassroomState extends State<Classroom> {
             )
         ),
       floatingActionButton: FloatingActionButton.large(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => addClassForm(widget.user),
-                ));
-            // display a form to take inputs of new class
-          }
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => addClassForm(widget.user),
+            )
+          );
+        }
       ),
     );
   }

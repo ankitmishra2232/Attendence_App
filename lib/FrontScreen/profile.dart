@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
   Profile(this.user, {Key? key}) : super(key: key);
-  User1 user;
+  User1? user;
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  var tName, tEmail, tPhone;
 
   @override
   Widget build(BuildContext context) {
@@ -52,28 +51,19 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.0),
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      tName,
-                      style: TextStyle(
+                      widget.user!.teacherName!,
+                      style: const TextStyle(
                         fontSize: 20.0,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.0),
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      tEmail,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      tPhone,
-                      style: TextStyle(
+                      widget.user!.teacherEmail!,
+                      style: const TextStyle(
                         fontSize: 20.0,
                       ),
                     ),
@@ -81,7 +71,13 @@ class _ProfileState extends State<Profile> {
                   Padding(
                     padding: const EdgeInsets.only(top: 80.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const LoginSignUp(),
+                            )
+                        );
+                      },
                       child: const Text("LogOut"),
                     ),
                   )
@@ -92,11 +88,5 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
-  }
-
-  void initialise() {
-    tName = widget.user.teacherName;
-    tEmail = widget.user.teacherEmail;
-    tPhone = widget.user.phoneNum;
   }
 }
