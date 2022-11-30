@@ -27,46 +27,60 @@ class _addClassFormState extends State<addClassForm> {
       appBar: AppBar(
         title: const Text("Add Class"),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 150.0),
-              child: TextFormField(
-                autofocus: true,
-                keyboardType: TextInputType.text,
-                controller: _classID,
-                decoration: const InputDecoration(
-                  label: Text("Enter ClassID"),
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 150.0),
+                child: TextFormField(
+                  autofocus: true,
+                  keyboardType: TextInputType.text,
+                  controller: _classID,
+                  validator: (value) {
+                    if(value == null || value.isEmpty) {
+                      return "Enter Class ID";
+                    }
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Enter ClassID"),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
-              child: TextFormField(
-                keyboardType: TextInputType.name,
-                controller: _className,
-                decoration: const InputDecoration(
-                  label: Text("Enter Class Name"),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 10.0),
+                child: TextFormField(
+                  keyboardType: TextInputType.name,
+                  controller: _className,
+                  validator: (value) {
+                    if(value == null || value.isEmpty) {
+                      return "Enter Class Name";
+                    }
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Enter Class Name"),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  addClass();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainScreen(widget.user)),
-                  );
-                },
-                child: const Text("Submit"),
-              ),
-            )
-          ],
-        )
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      addClass();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainScreen(widget.user)),
+                      );
+                    }
+                  },
+                  child: const Text("Submit"),
+                ),
+              )
+            ],
+          )
+        ),
       ),
     );
   }

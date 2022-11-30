@@ -25,72 +25,74 @@ class _SignupState extends State<Signup> {
       appBar: AppBar(
         title: const Text("Register please...."),
       ),
-      body: Container(
-        padding: const EdgeInsets.only(left:20, right: 10, top:20),
-        child: Form(
-          key: formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                TextFormField(
-                  validator: (email) {
-                    if (isEmailValid(email)) {
-                      return null;
-                    }
-                    else {
-                      return 'Enter a valid email address';
-                    }
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  controller: _teacheremail,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.email),
-                    hintText: 'Enter Your E-Mail',
-                    labelText: 'E-mail',
-                  ),
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.name,
-                  controller: _name,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.person),
-                    hintText: 'Enter your name',
-                    labelText: 'Name',
-                  ),
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: _password,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.password),
-                    labelText: 'Password',
-                  ),
-
-                ),
-                TextFormField(
-                  controller: _phone,
-                  decoration: const InputDecoration(
-                      icon: Icon(Icons.phone_android),
-                      hintText: 'Enter your mobile number',
-                      labelText: 'Phone',
-                ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left:100,top: 30),
-                  child: ElevatedButton(
-                    onPressed: (){
-                      postData();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const MyApp()),
-                      );
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(left:20, right: 10, top:20),
+          child: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  TextFormField(
+                    validator: (email) {
+                      if (isEmailValid(email)) {
+                        return null;
+                      }
+                      else {
+                        return 'Enter a valid email address';
+                      }
                     },
-                    child: const Text("Submit") ,
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _teacheremail,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.email),
+                      hintText: 'Enter Your E-Mail',
+                      labelText: 'E-mail',
+                    ),
                   ),
-                ),
-              ],
+                  TextFormField(
+                    keyboardType: TextInputType.name,
+                    controller: _name,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.person),
+                      hintText: 'Enter your name',
+                      labelText: 'Name',
+                    ),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: _password,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.password),
+                      labelText: 'Password',
+                    ),
+
+                  ),
+                  TextFormField(
+                    controller: _phone,
+                    decoration: const InputDecoration(
+                        icon: Icon(Icons.phone_android),
+                        hintText: 'Enter your mobile number',
+                        labelText: 'Phone',
+                  ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left:100,top: 30),
+                    child: ElevatedButton(
+                      onPressed: (){
+                        postData();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MyApp()),
+                        );
+                      },
+                      child: const Text("Submit") ,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

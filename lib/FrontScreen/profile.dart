@@ -31,58 +31,60 @@ class _ProfileState extends State<Profile> {
           )
         ],
       ),
-      body: Center(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.4,
-          child: Card(
-            color: Colors.lightBlue,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Container(
-                    width: 100.0,
-                    height: 100.0,
-                    color: Colors.white,
-                    child: const Icon(Icons.face, size: 100.0),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Text(
-                    "Name: ${widget.user!.teacherName!}",
-                    style: const TextStyle(
-                      fontSize: 20.0,
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.4,
+            child: Card(
+              color: Colors.lightBlue,
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Container(
+                      width: 100.0,
+                      height: 100.0,
+                      color: Colors.white,
+                      child: const Icon(Icons.face, size: 100.0),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Text(
-                    "Email: ${widget.user!.teacherEmail!}",
-                    style: const TextStyle(
-                      fontSize: 20.0,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      "Name: ${widget.user!.teacherName!}",
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      "Email: ${widget.user!.teacherEmail!}",
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const MyApp(),
-                          )
-                      );
-                    },
-                    child: const Text("LogOut"),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const MyApp(),
+                            )
+                        );
+                      },
+                      child: const Text("LogOut"),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

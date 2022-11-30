@@ -11,6 +11,7 @@ class AddLecForm extends StatefulWidget {
 class _AddLecFormState extends State<AddLecForm> {
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     String dayVal = "Monday";
     String startTimeVal = "09:30";
     String endTimeVal = "09:30";
@@ -20,33 +21,17 @@ class _AddLecFormState extends State<AddLecForm> {
       appBar: AppBar(
         title: const Text("Add Lecture Timings"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 200.0),
-        child: Form(
-          child: Center(
-            child: Column(
-              children: <Widget> [
-                DropdownButton(
-                  hint: const Text("Select Day"),
-                  items: days.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Center(child: Text(items)),
-                    );
-                  }).toList(),
-                  onChanged: (String? newVal) {
-                    setState(() {
-                      dayVal = newVal!;
-                    });
-                  }
-                ),
-                DropdownButton(
-                  menuMaxHeight: 300.0,
-                    hint: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("Select Start Time"),
-                    ),
-                    items: time.map((String items) {
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 200.0),
+          child: Form(
+            key: _formKey,
+            child: Center(
+              child: Column(
+                children: <Widget> [
+                  DropdownButton(
+                    hint: const Text("Select Day"),
+                    items: days.map((String items) {
                       return DropdownMenuItem(
                         value: items,
                         child: Center(child: Text(items)),
@@ -54,41 +39,62 @@ class _AddLecFormState extends State<AddLecForm> {
                     }).toList(),
                     onChanged: (String? newVal) {
                       setState(() {
-                        startTimeVal = newVal!;
+                        dayVal = newVal!;
                       });
                     }
-                ),
-                DropdownButton(
-                    menuMaxHeight: 300.0,
-                    hint: const Text("Select End Time"),
-                    items: time.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Center(child: Text(items)),
-                      );
-                    }).toList(),
-                    onChanged: (String? newVal) {
-                      setState(() {
-                        endTimeVal = newVal!;
-                      });
-                    }
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      int value = checkTime(startTimeVal, endTimeVal);
-                      if (value == 1) {
-                        // push data to excel
-                      }
-                      else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Wrong Timings")));
-                      }
-                    },
-                    child: const Text("Submit"),
                   ),
-                ),
-              ],
+                  DropdownButton(
+                    menuMaxHeight: 300.0,
+                      hint: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("Select Start Time"),
+                      ),
+                      items: time.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Center(child: Text(items)),
+                        );
+                      }).toList(),
+                      onChanged: (String? newVal) {
+                        setState(() {
+                          startTimeVal = newVal!;
+                        });
+                      }
+                  ),
+                  DropdownButton(
+                      menuMaxHeight: 300.0,
+                      hint: const Text("Select End Time"),
+                      items: time.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Center(child: Text(items)),
+                        );
+                      }).toList(),
+                      onChanged: (String? newVal) {
+                        setState(() {
+                          endTimeVal = newVal!;
+                        });
+                      }
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          int value = checkTime(startTimeVal, endTimeVal);
+                          if (value == 1) {
+                            // push data to excel
+                          }
+                          else {
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Wrong Timings")));
+                          }
+                        }
+                      },
+                      child: const Text("Submit"),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -17,44 +17,46 @@ class _ClassDataState extends State<ClassData> {
       appBar: AppBar(
         title: Text(widget.data.ClassName), // Name Of Subject
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 200.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      widget.data.ClassName,
-                      style: const TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 200.0),
+            child: Column(
+              children: <Widget>[
+                Card(
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        widget.data.ClassName,
+                        style: const TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
-                    ),
-                    Text(
-                      widget.data.ClassID,
-                      style: const TextStyle(
-                        fontSize: 30.0
+                      Text(
+                        widget.data.ClassID,
+                        style: const TextStyle(
+                          fontSize: 30.0
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => scan(widget.data),
-                        )
-                    );
-                  },
-                  child: const Text("Scan"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => scan(widget.data),
+                          )
+                      );
+                    },
+                    child: const Text("Scan"),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

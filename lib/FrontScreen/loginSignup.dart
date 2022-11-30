@@ -60,6 +60,7 @@ class _LoginSignUpState extends State<LoginSignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: TextFormField(
+                  obscureText: true,
                   controller: passwordController,
                   decoration: const InputDecoration(
                       hintText: 'Password'

@@ -58,7 +58,7 @@ class _scanState extends State<scan> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   height: 60.0,
                   color: Colors.black,
                   child: Center(
@@ -66,7 +66,7 @@ class _scanState extends State<scan> {
                       _data,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 40.0,
+                        fontSize: 30.0,
                       ),
                     ),
                   ),
@@ -109,7 +109,7 @@ class _scanState extends State<scan> {
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   height: 60.0,
                   color: Colors.black,
                   child: Center(
@@ -117,7 +117,7 @@ class _scanState extends State<scan> {
                       _inputdata.text,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 40.0,
+                        fontSize: 30.0,
                       ),
                     ),
                   ),
@@ -163,7 +163,7 @@ class _scanState extends State<scan> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>
-                              cards(uniqueID:uniqueID)),
+                              Cards(uniqueID:uniqueID)),
                           );
                         }
                       },
