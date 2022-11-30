@@ -23,7 +23,9 @@ class _ClassroomState extends State<Classroom> {
     var notesJson = jsonDecode(response.body);
     for (var x in notesJson) {
       Classes1 classes = Classes1(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
-      classList.add(classes);
+      if(widget.user.teacherEmail==x["TeacherEmail"]){
+        classList.add(classes);
+      }
     }
     return classList;
   }
