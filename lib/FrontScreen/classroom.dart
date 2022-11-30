@@ -31,7 +31,10 @@ class _ClassroomState extends State<Classroom> {
       Classes1 classes = Classes1(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
       // print(jsonEncode(classes));
       // print(classes);
-      classList.add(classes);
+      if(widget.user.teacherEmail==x["TeacherEmail"]){
+        classList.add(classes);
+      }
+
     }
     print(classList.length);
     return classList;
