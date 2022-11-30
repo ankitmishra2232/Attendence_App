@@ -9,6 +9,7 @@ import 'package:http/http.dart'as http;
 class Classroom extends StatefulWidget {
   Classroom(this.user, {Key? key}) : super(key: key);
   User1 user;
+
   @override
   State<Classroom> createState() => _ClassroomState();
 }
@@ -23,21 +24,18 @@ class _ClassroomState extends State<Classroom> {
     var notesJson = jsonDecode(response.body);
     for (var x in notesJson) {
       Classes1 classes = Classes1(x["ClassID"], x["ClassName"], x["TeacherEmail"]);
-      if(widget.user.teacherEmail==x["TeacherEmail"]){
+      if (widget.user.teacherEmail == x["TeacherEmail"]) {
         classList.add(classes);
       }
     }
-    print(classList);
-    print(classList.length);
     return classList;
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("${widget.user.teacherName}"), //Name of Teacher
+          title: Text("${widget.user.teacherName}"),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.face),
@@ -63,13 +61,13 @@ class _ClassroomState extends State<Classroom> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
                     return const Center(
-                        child: Text(
-                          "Loading...",
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            color: Colors.white,
-                          ),
-                        )
+                      child: Text(
+                        "Loading...",
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          color: Colors.white,
+                        ),
+                      ),
                     );
                   }
                   else {
@@ -136,9 +134,10 @@ class _ClassroomState extends State<Classroom> {
         child: const Icon(Icons.add),
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => addClassForm(widget.user),
-            )
+            context,
+            MaterialPageRoute(
+              builder: (context) => addClassForm(widget.user),
+            ),
           );
         }
       ),

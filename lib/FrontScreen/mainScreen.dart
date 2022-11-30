@@ -7,6 +7,7 @@ import './classroom.dart';
 class MainScreen extends StatefulWidget {
   MainScreen(this.user, {Key? key}) : super(key: key);
   User1 user;
+
   @override
   State<MainScreen> createState() => _MainScreenState();
 }

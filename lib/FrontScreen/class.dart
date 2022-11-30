@@ -1,7 +1,5 @@
-import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import '../scan/scan.dart';
-import './addLecForm.dart';
 import 'classroom.dart';
 
 class ClassData extends StatefulWidget {
@@ -27,8 +25,19 @@ class _ClassDataState extends State<ClassData> {
               Card(
                 child: Column(
                   children: <Widget>[
-                    Text(widget.data.ClassName, style: const TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
-                    Text(widget.data.ClassID, style: const TextStyle(fontSize: 30.0)),
+                    Text(
+                      widget.data.ClassName,
+                      style: const TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Text(
+                      widget.data.ClassID,
+                      style: const TextStyle(
+                        fontSize: 30.0
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -38,7 +47,7 @@ class _ClassDataState extends State<ClassData> {
                   onPressed: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => scan(widget.data.TeacherEmail),
+                            builder: (context) => scan(widget.data),
                         )
                     );
                   },

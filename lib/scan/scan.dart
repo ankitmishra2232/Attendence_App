@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:attendence_app/FrontScreen/classroom.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -7,8 +8,8 @@ import 'View.dart';
 import 'package:attendence_app/model/model.dart';
 
 class scan extends StatefulWidget {
-  scan(this.teacherEmail, {Key? key}) : super(key: key);
-  String teacherEmail;
+  scan(this.data, {Key? key}) : super(key: key);
+  Classes1 data;
   @override
   State<scan> createState() => _scanState();
 }
@@ -17,14 +18,15 @@ class _scanState extends State<scan> {
   List <String> uniqueID=[];
   String date1="";
   String time1="";
-  String attendence0="";
+  String attendance0="";
   String _data ="";
   String information ="";
   bool _displayNewTextField = false;
   TextEditingController _inputdata = TextEditingController();
+
   _scan() async{
     return await FlutterBarcodeScanner.scanBarcode("#000000", "Cancel", true, ScanMode.BARCODE)
-        .then((value) => setState(()=>_data = value));
+      .then((value) => setState(()=>_data = value));
   }
 
   @override
@@ -33,7 +35,7 @@ class _scanState extends State<scan> {
     String date0= DateFormat.yMMMMd('en_US').format(date);
     final time = DateTime.now();
     final time0 = DateFormat.Hm().format(time);
-    attendence0 = uniqueID.toString();
+    attendance0 = uniqueID.toString();
     date1=date0.toString();
     time1=time0.toString();
     return Scaffold(
@@ -160,7 +162,7 @@ class _scanState extends State<scan> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>
-                                cards(uniqueID:uniqueID)),
+                              cards(uniqueID:uniqueID)),
                           );
                         }
                       },
@@ -176,7 +178,7 @@ class _scanState extends State<scan> {
                   child: ElevatedButton(
                       onPressed: (){
                         // print(uniqueID.toString());
-                        postAttendence();
+                        postAttendance();
                       },
                       child: const Text("Save and Upload"),
                   ),
@@ -188,11 +190,12 @@ class _scanState extends State<scan> {
       ),
     );
   }
-  postAttendence() async{
-    final attendence= Att(widget.teacherEmail,date1,time1,attendence0);
-    String attendenceinfo=jsonEncode(attendence);
-    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbxtK7kAkxeOT4xLQEVP41mZf33WkJqZZ9brNaQ_VfedlXvZX93K30IZe4iCf4DKNJoxwg/exec?action=addAttandance"),
-      body: attendenceinfo,
+
+  postAttendance() async{
+    final attendance = Att(widget.data.TeacherEmail, widget.data.ClassID, date1, time1, attendance0);
+    String attendanceInfo = jsonEncode(attendance);
+    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbxiHpSfcdnh0eme5tMS6KkC_TC28eVn5oItj-Pn9nrMHHqz7Ezp9gOrthJtGa6g2OYWCw/exec?action=addAttandance"),
+      body: attendanceInfo,
     );
   }
 }

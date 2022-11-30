@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart'as http;
-import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:attendence_app/model/classes.dart';
 import 'package:flutter/material.dart';
-
-import 'classroom.dart';
 import 'loginSignup.dart';
 import 'mainScreen.dart';
 
@@ -31,6 +28,7 @@ class _addClassFormState extends State<addClassForm> {
         title: const Text("Add Class"),
       ),
       body: Form(
+        key: _formKey,
         child: Column(
           children: <Widget>[
             Padding(
@@ -73,10 +71,7 @@ class _addClassFormState extends State<addClassForm> {
     );
   }
 
-  addClass() async { // testing not done
-    print(_classID.text);
-    print(_className.text);
-    print(widget.user.teacherEmail);
+  addClass() async {
     var tEmail;
     tEmail = widget.user.teacherEmail;
     final classes = Classes(_classID.text, _className.text, tEmail);
@@ -85,6 +80,5 @@ class _addClassFormState extends State<addClassForm> {
       Uri.parse("https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=addClass"),
       body: classData,
     );
-    print(response.body);
   }
 }

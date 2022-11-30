@@ -31,17 +31,22 @@ class LoginUser{
 
 
 class Att{
-  String Email, date, time, attendence;
-  Att(this.Email,this.date,this.time,this.attendence);
+  String Email, ClassID, date, time, attendance;
+
+  Att(this.Email, this.ClassID, this.date, this.time, this.attendance);
+
   Att.fromJson(Map<String,dynamic> json):
-      Email=json['Email'],
-      date=json['date'],
-      time= json['time'],
-        attendence=json['attendence'];
-  Map<String,dynamic> toJson()=>{
+    Email = json['Email'],
+    ClassID = json['ClassID'],
+    date = json['date'],
+    time = json['time'],
+    attendance = json['attendence'];
+
+  Map<String,dynamic> toJson() => {
     'Email': Email,
-    'date':date,
-    'time':time,
-    'attendence':attendence
+    'ClassID': ClassID,
+    'date': date,
+    'time': time,
+    'attendence': attendance
   };
 }
