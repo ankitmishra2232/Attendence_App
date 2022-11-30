@@ -135,7 +135,7 @@ class _scanState extends State<scan> {
                             information = _data;
                         }
                         if(information != ""){
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Center(child: Text("Student ID: $information submitted"))));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Student ID: $information submitted")));
                           uniqueID.add(information);
                           information = "";
                           _inputdata.text ="";
@@ -175,6 +175,7 @@ class _scanState extends State<scan> {
                   height: 40.0,
                   child: ElevatedButton(
                       onPressed: (){
+                        // print(uniqueID.toString());
                         postAttendence();
                       },
                       child: const Text("Save and Upload"),
