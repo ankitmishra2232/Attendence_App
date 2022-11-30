@@ -27,6 +27,8 @@ class _ClassroomState extends State<Classroom> {
         classList.add(classes);
       }
     }
+    print(classList);
+    print(classList.length);
     return classList;
   }
 
@@ -57,76 +59,76 @@ class _ClassroomState extends State<Classroom> {
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
               child: FutureBuilder(
-                  future: getClasses(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.data == null) {
-                      return const Center(
-                          child: Text(
-                            "Loading...",
-                            style: TextStyle(
-                              fontSize: 30.0,
-                              color: Colors.white,
-                            ),
-                          )
-                      );
-                    }
-                    else {
-                      return Column(
-                        children: [
-                          for (int i = 0; i < snapshot.data.length; i++)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 15.0),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.red,
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => ClassData(snapshot.data[i])
-                                    )
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: SizedBox(
-                                    height: 150.0,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Card(
-                                      color: Colors.amber,
-                                      elevation: 25.0,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 40.0),
-                                            child: Text(
-                                              "${snapshot.data[i].ClassID}",
-                                              style: const TextStyle(
-                                                fontSize: 30.0,
-                                                decoration: TextDecoration.underline,
-                                              ),
+                future: getClasses(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return const Center(
+                        child: Text(
+                          "Loading...",
+                          style: TextStyle(
+                            fontSize: 30.0,
+                            color: Colors.white,
+                          ),
+                        )
+                    );
+                  }
+                  else {
+                    return Column(
+                      children: [
+                        for (int i = 0; i < snapshot.data.length; i++)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.red,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ClassData(snapshot.data[i])
+                                  )
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: SizedBox(
+                                  height: 150.0,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Card(
+                                    color: Colors.amber,
+                                    elevation: 25.0,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 40.0),
+                                          child: Text(
+                                            "${snapshot.data[i].ClassID}",
+                                            style: const TextStyle(
+                                              fontSize: 30.0,
+                                              decoration: TextDecoration.underline,
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(top: 10.0),
-                                            child: Text(
-                                              "${snapshot.data[i].ClassName}",
-                                              style: const TextStyle(
-                                                fontSize: 20.0,
-                                              ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text(
+                                            "${snapshot.data[i].ClassName}",
+                                            style: const TextStyle(
+                                              fontSize: 20.0,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
                               ),
-                            )
-                        ],
-                      );
-                    }
+                            ),
+                          )
+                      ],
+                    );
                   }
+                }
               ),
             )
         ),
@@ -143,50 +145,6 @@ class _ClassroomState extends State<Classroom> {
     );
   }
 }
-
-
-                    //   ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: Colors.red,
-                    //   ),
-                    //   onPressed: () {},
-                    //   child: Padding (
-                    //     padding: const EdgeInsets.all(8.0),
-                    //     child: SizedBox(
-                    //       height: 150.0,
-                    //       child: Card(
-                    //         color: Colors.amber,
-                    //         shadowColor: Colors.white,
-                    //         elevation: 25.0,
-                    //         child: Column(
-                    //           children: <Widget>[
-                    //             const Padding(
-                    //               padding: EdgeInsets.only(top: 40.0),
-                    //               child: Text (
-                    //                 "CSC-105",
-                    //                 style: TextStyle(
-                    //                   fontSize: 30.0,
-                    //                   decoration: TextDecoration.underline,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //             Padding(
-                    //               padding: const EdgeInsets.only(top: 10.0, left: 70.0),
-                    //               child: Row(
-                    //                 children: const <Widget> [
-                    //                   Text (
-                    //                     "Android Programming",
-                    //                     style: TextStyle(fontSize: 20.0),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // );
 
 class Classes1{
   final String ClassID;

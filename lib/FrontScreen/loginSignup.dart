@@ -14,10 +14,9 @@ class LoginSignUp extends StatefulWidget {
 class _LoginSignUpState extends State<LoginSignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool out=true;
   List<User1> users = [];
 
-  fetchNotes() async{
+  fetchNotes() async {
     final response = await http.get(Uri.parse('https://script.google.com/macros/s/AKfycbxUX_3HZZzXKIcMNWRr4S_BgJyEghj8sACssjLkErfrxcVKTiNHF-nrd-KrscA5WqtzvQ/exec?action=getTeacher'));
     var notesJson = jsonDecode(response.body);
     for(var u in notesJson){
@@ -61,7 +60,6 @@ class _LoginSignUpState extends State<LoginSignUp> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: TextFormField(
-                  // obscureText: true,
                   controller: passwordController,
                   decoration: const InputDecoration(
                       hintText: 'Password'
@@ -69,10 +67,10 @@ class _LoginSignUpState extends State<LoginSignUp> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   var flag = 0;
-                  for(var i=0;i<users.length;i++){
-                    if(users[i].teacherEmail==emailController.text &&  users[i].password==passwordController.text){
+                  for(var i=0;i<users.length;i++) {
+                    if(users[i].teacherEmail==emailController.text &&  users[i].password==passwordController.text) {
                       flag = 1;
                       Navigator.push(
                         context,
