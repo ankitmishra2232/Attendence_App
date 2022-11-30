@@ -158,6 +158,7 @@ class _scanState extends State<scan> {
                   height: 40.0,
                   child: ElevatedButton(
                       onPressed: () {
+                        print(widget.data.ClassID.toString());
                         if(!uniqueID.isEmpty){
                           Navigator.push(
                             context,
@@ -179,6 +180,7 @@ class _scanState extends State<scan> {
                       onPressed: (){
                         // print(uniqueID.toString());
                         postAttendance();
+
                       },
                       child: const Text("Save and Upload"),
                   ),
@@ -192,11 +194,12 @@ class _scanState extends State<scan> {
   }
 
   postAttendance() async{
-    final attendance = Att(widget.data.TeacherEmail, widget.data.ClassID, date1, time1, attendance0);
+    final attendance = Att(widget.data.TeacherEmail, widget.data.ClassID.toString(), date1, time1, attendance0);
     String attendanceInfo = jsonEncode(attendance);
-    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbxiHpSfcdnh0eme5tMS6KkC_TC28eVn5oItj-Pn9nrMHHqz7Ezp9gOrthJtGa6g2OYWCw/exec?action=addAttandance"),
+    var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbznhs8Ni-TGNrC6_D7Lrc3HSLe1azW4gVdWWyqe7ijXngnhncbrtqG9cUycSq89K3sLJQ/exec?action=addAttandance"),
       body: attendanceInfo,
     );
+    print(attendanceInfo);
   }
 }
 
