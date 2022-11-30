@@ -19,19 +19,6 @@ class _AddLecFormState extends State<AddLecForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Lecture Timings"),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.face),
-            tooltip: "Profile",
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const Profile()
-                  )
-              );
-            },
-          )
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 200.0),

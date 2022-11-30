@@ -2,10 +2,11 @@ import 'package:attendence_app/FrontScreen/profile.dart';
 import 'package:flutter/material.dart';
 import '../scan/scan.dart';
 import './addLecForm.dart';
+import 'classroom.dart';
 
 class ClassData extends StatefulWidget {
-  const ClassData({Key? key}) : super(key: key);
-
+  ClassData(this.data, {Key? key}) : super(key: key);
+  Classes1 data;
   @override
   State<ClassData> createState() => _ClassDataState();
 }
@@ -15,20 +16,7 @@ class _ClassDataState extends State<ClassData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Android Programming"), // Name Of Subject
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.face),
-            tooltip: "Profile",
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const Profile(),
-                ),
-              );
-            },
-          ),
-        ],
+        title: Text(widget.data.ClassName), // Name Of Subject
       ),
       body: Center(
         child: Padding(
@@ -37,24 +25,10 @@ class _ClassDataState extends State<ClassData> {
             children: <Widget>[
               Card(
                 child: Column(
-                  children: const <Widget>[
-                    Text("Android Programming", style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
-                    Text("CSC-105", style: TextStyle(fontSize: 30.0)),
-                    Text("Day and Time", style: TextStyle(fontSize: 30.0)),
+                  children: <Widget>[
+                    Text(widget.data.ClassName, style: const TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
+                    Text(widget.data.ClassID, style: const TextStyle(fontSize: 30.0)),
                   ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const AddLecForm()
-                      )
-                    );
-                  },
-                  child: const Text("Add Lecture"),
                 ),
               ),
               Padding(
@@ -63,7 +37,7 @@ class _ClassDataState extends State<ClassData> {
                   onPressed: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => const scan()
+                            builder: (context) => scan(widget.data.TeacherEmail),
                         )
                     );
                   },

@@ -7,8 +7,8 @@ import 'View.dart';
 import 'package:attendence_app/model/model.dart';
 
 class scan extends StatefulWidget {
-  const scan({Key? key}) : super(key: key);
-
+  scan(this.teacherEmail, {Key? key}) : super(key: key);
+  String teacherEmail;
   @override
   State<scan> createState() => _scanState();
 }
@@ -37,96 +37,162 @@ class _scanState extends State<scan> {
     date1=date0.toString();
     time1=time0.toString();
     return Scaffold(
-
       appBar: AppBar(
-        title: Text("Scanning"),
+        title: const Text("Scanning"),
       ),
-        body: Column(
-          children: [
-            ElevatedButton(
-                onPressed:()=> _scan(),
-                child: Text("Scan")
-            ),
-            Text(_data),
-            Visibility(
-              visible: _displayNewTextField,
-                child: TextFormField(
-                  keyboardType: TextInputType.phone,
-                  controller: _inputdata,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.location_on),
-                    hintText: 'Enter Unique code',
-                    labelText: 'Unique ID',
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: Column(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: 40.0,
+                child: ElevatedButton(
+                    onPressed:()=> _scan(),
+                    child: const Text("Scan"),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 60.0,
+                  color: Colors.black,
+                  child: Center(
+                    child: Text(
+                      _data,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 40.0,
+                      ),
+                    ),
                   ),
                 ),
-            ),
-            ElevatedButton(
-                onPressed:  () async {
-                  setState(() {
-                    _displayNewTextField = true;
-                  });
-                  _data="";
-                },
-                child: Text("Add mannually")
-            ),
-            Text(_inputdata.text),
-            ElevatedButton(
-                onPressed: (){
-                  if (_data=="-1" || _data == ""){
-                      information = _inputdata.text;
-                  }
-                  else{
-                      information = _data;
-                  }
-                  // print("information  "+ information);
-                  if(information != ""){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("information  "+ information)));
-                    uniqueID.add(information);
-                    information = "";
-                    _inputdata.text ="";
-                    _data="";
-                  }
-                  else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Insert Data")));
-                  }
-
-                },
-                child: Text("Submit ")),
-            ElevatedButton(
-                onPressed: () {
-                  if(!uniqueID.isEmpty){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>
-                          cards(uniqueID:uniqueID)),
-                    );
-                  }
-
-                },
-                child: Text("View")),
-            ElevatedButton(
-                onPressed: (){
-                  // print(uniqueID.toString());
-                  print(" hii"+attendence0);
-                  postAttendence();
-                },
-                child: Text("Save and Upload"))
-
-
-          ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Visibility(
+                    visible: _displayNewTextField,
+                      child: TextFormField(
+                        keyboardType: TextInputType.phone,
+                        controller: _inputdata,
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.location_on),
+                          hintText: 'Enter Unique code',
+                          labelText: 'Unique ID',
+                        ),
+                      ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 40.0,
+                  child: ElevatedButton(
+                      onPressed:  () async {
+                        setState(() {
+                          _displayNewTextField = true;
+                        });
+                        _data="";
+                      },
+                      child: const Text("Add manually"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 60.0,
+                  color: Colors.black,
+                  child: Center(
+                    child: Text(
+                      _inputdata.text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 40.0,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 40.0,
+                  child: ElevatedButton(
+                      onPressed: (){
+                        if (_data=="-1" || _data == ""){
+                            information = _inputdata.text;
+                        }
+                        else{
+                            information = _data;
+                        }
+                        if(information != ""){
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Center(child: Text("Student ID: $information submitted"))));
+                          uniqueID.add(information);
+                          information = "";
+                          _inputdata.text ="";
+                          _data="";
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Center(child: Text("Please Insert Data"))));
+                        }
+                      },
+                      child: const Text("Submit "),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 40.0,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        if(!uniqueID.isEmpty){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>
+                                cards(uniqueID:uniqueID)),
+                          );
+                        }
+                      },
+                      child: const Text("View")
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: 40.0,
+                  child: ElevatedButton(
+                      onPressed: (){
+                        postAttendence();
+                      },
+                      child: const Text("Save and Upload"),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
   postAttendence() async{
-    final attendence= Att("abc@gmail.com",date1,time1,attendence0);
+    final attendence= Att(widget.teacherEmail,date1,time1,attendence0);
     String attendenceinfo=jsonEncode(attendence);
     var response = await http.post(Uri.parse("https://script.google.com/macros/s/AKfycbxtK7kAkxeOT4xLQEVP41mZf33WkJqZZ9brNaQ_VfedlXvZX93K30IZe4iCf4DKNJoxwg/exec?action=addAttandance"),
       body: attendenceinfo,
     );
-    print(response.body);
-    print(attendenceinfo);
-
   }
-
 }
 

@@ -5,9 +5,11 @@ import 'package:attendence_app/model/classes.dart';
 import 'package:flutter/material.dart';
 
 import 'classroom.dart';
+import 'loginSignup.dart';
 
 class addClassForm extends StatefulWidget {
-  const addClassForm({Key? key}) : super(key: key);
+  addClassForm(this.user, {Key? key}) : super(key: key);
+  User1 user;
 
   @override
   State<addClassForm> createState() => _addClassFormState();
@@ -26,19 +28,6 @@ class _addClassFormState extends State<addClassForm> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Class"),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.face),
-            tooltip: "Profile",
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const Profile()
-                  )
-              );
-            },
-          )
-        ],
       ),
       body: Form(
         child: Column(
@@ -68,14 +57,10 @@ class _addClassFormState extends State<addClassForm> {
               padding: const EdgeInsets.all(20.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // add value in database
-                  // if (_formKey.currentState!.validate()) {
-                  //   addClass();
-                  // }
                   addClass();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Classroom()),
+                    MaterialPageRoute(builder: (context) => Classroom(widget.user)),
                   );
                 },
                 child: const Text("Submit"),
@@ -88,10 +73,12 @@ class _addClassFormState extends State<addClassForm> {
   }
 
   addClass() async { // testing not done
-    // final classes = Classes(ClassID, ClassName, TeacherEmail); //teacher email needs to fetch from local storage
     print(_classID.text);
     print(_className.text);
-    final classes = Classes(_classID.text, _className.text, "jsf001@unigoa.ac.in");
+    print(widget.user.teacherEmail);
+    var tEmail;
+    tEmail = widget.user.teacherEmail;
+    final classes = Classes(_classID.text, _className.text, tEmail);
     String classData = jsonEncode(classes);
     var response = await http.post(
       Uri.parse("https://script.google.com/macros/s/AKfycbyZCHxey_JUEsN8d1WKwSI4u4yP91DXrqfPqEozALNvSWXkwUQEKbmyrvTWQ20-TsDNJA/exec?action=addClass"),

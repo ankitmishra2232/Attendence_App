@@ -87,7 +87,7 @@ class _SignupState extends State<Signup> {
                     //  if submitted succesfully back to login screen
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => loginsignup()),
+                        MaterialPageRoute(builder: (context) => LoginSignUp()),
                       );
                     },
                   child: Text("Submit") ,

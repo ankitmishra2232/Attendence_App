@@ -1,13 +1,17 @@
+import 'package:attendence_app/FrontScreen/loginSignup.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  Profile(this.user, {Key? key}) : super(key: key);
+  User1 user;
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  var tName, tEmail, tPhone;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,7 @@ class _ProfileState extends State<Profile> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const Profile()
+                  builder: (context) => Profile(widget.user),
                 )
               );
             },
@@ -47,28 +51,28 @@ class _ProfileState extends State<Profile> {
                       child: const Icon(Icons.face, size: 100.0),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "Teacher Name",
+                      tName,
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "Teacher Email",
+                      tEmail,
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: Text(
-                      "Subjects Taught",
+                      tPhone,
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
@@ -88,5 +92,11 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  void initialise() {
+    tName = widget.user.teacherName;
+    tEmail = widget.user.teacherEmail;
+    tPhone = widget.user.phoneNum;
   }
 }
