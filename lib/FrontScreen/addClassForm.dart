@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'classroom.dart';
 import 'loginSignup.dart';
+import 'mainScreen.dart';
 
 class addClassForm extends StatefulWidget {
   addClassForm(this.user, {Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class _addClassFormState extends State<addClassForm> {
                   addClass();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Classroom(widget.user)),
+                    MaterialPageRoute(builder: (context) => MainScreen(widget.user)),
                   );
                 },
                 child: const Text("Submit"),

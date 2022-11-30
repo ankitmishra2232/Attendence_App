@@ -1,6 +1,8 @@
 import 'package:attendence_app/FrontScreen/loginSignup.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class Profile extends StatefulWidget {
   Profile(this.user, {Key? key}) : super(key: key);
   User1? user;
@@ -10,7 +12,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +75,7 @@ class _ProfileState extends State<Profile> {
                     onPressed: () {
                       Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const LoginSignUp(),
+                            builder: (context) => const MyApp(),
                           )
                       );
                     },

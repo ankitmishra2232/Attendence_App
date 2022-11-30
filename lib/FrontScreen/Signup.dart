@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../main.dart';
 import'../model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -87,7 +88,7 @@ class _SignupState extends State<Signup> {
                     //  if submitted succesfully back to login screen
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginSignUp()),
+                        MaterialPageRoute(builder: (context) => MyApp()),
                       );
                     },
                   child: Text("Submit") ,
